@@ -3,11 +3,20 @@
 using namespace std;
 
 int n, k;
-deque<int> dq(201);
+deque<int> belt(201);
+int cnt;
+bool visit[101];
 
 void move_belt() {
-	dq.push_front(dq[2*n-1]);
-	dq.erase(dq.begin() + (2*n));
+	belt.push_front(belt[2*n-1]);
+	belt.erase(belt.begin() + (2*n));
+	return;
+}
+void new_robot() {
+	if (visit[0] == false && belt[0] >= 1) {
+		visit[0] = true;
+		belt[0]--;
+	}
 	return;
 }
 
@@ -15,18 +24,17 @@ int main(void) {
 
 	cin >> n >> k;
 	for (int i = 0; i < 2*n; i++) {
-		cin >> dq[i];
+		cin >> belt[i];
 	}
+
+	while (cnt < k) {
+		cnt++;
+		move_belt();
+		new_robot();
+
+	}
+	cout << cnt << endl;
 	
-	move_belt();
-
-	for (int i = 0; i < 2 * n; i++) {
-		cout << dq[i] << " ";
-	}
-	cout << "\n";
-
-
-
 	return 0;
 }
 
