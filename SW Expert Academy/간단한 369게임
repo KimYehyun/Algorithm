@@ -1,0 +1,25 @@
+#include <iostream>
+#include<string>
+#include<vector>
+#include<algorithm>
+using namespace std;
+int main(void) {
+
+	string s;
+	getline(cin, s, '\n');
+	int c=0;
+	for (int i = 1; i <= stoi(s); i++) {
+		string str = to_string(i);
+		for (int j = 0; j < str.size(); j++) {
+			if (str[j] == '3' || str[j] == '6' || str[j] == '9') {
+				str[j] = '-';
+				c++;
+			}
+		}
+		if (c == 1)
+			str = '-';
+		cout << str << ' ';
+		c = 0;
+	}
+	return 0;
+}
