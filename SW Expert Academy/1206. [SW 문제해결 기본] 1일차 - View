@@ -1,0 +1,38 @@
+#include<iostream>
+using namespace std;
+
+bool view[1001][256];
+int main(void) {
+	
+	int n,l;
+	for (int c = 1; c <= 10; c++) {
+		printf("#%d ", c);
+		scanf("%d", &n);
+		for (int i = 1; i <= n; i++) {
+			scanf("%d", &l);
+			for (int j = 1; j <= l; j++) {
+				view[i][j] = true;
+			}
+		}
+
+		int count = 0;
+		for (int i = 1; i <= n; i++) {
+			for (int j = 1; j <= n; j++) {
+				if (view[i][j] == false)
+					break;
+				else if (view[i][j] == true && view[i-1][j] == false && view[i-2][j] == false && view[i+1][j] == false && view[i+2][j] == false)
+					count++;
+			}
+		}
+
+		printf("%d\n", count);
+		count = 0;
+	}
+	
+
+		
+	return 0;
+}
+
+
+
