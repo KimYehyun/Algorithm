@@ -1,0 +1,16 @@
+#include<iostream>
+using namespace std;
+int main(void) {
+
+	int n, t1, t2;
+	scanf("%d", &n);
+	for (int i = 1; i <= n; i++) {
+		scanf("%d %d", &t1, &t2);
+		int result = t1 + t2;
+		if (result >= 24)
+			result -= 24;
+		printf("#%d %d\n", i, result);
+
+	}
+	return 0;
+}
