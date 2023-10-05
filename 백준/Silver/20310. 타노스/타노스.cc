@@ -13,11 +13,27 @@ int main(void) {
 		else one++;
 	}
 	string result = "";
-	for (int i = 0; i < zero / 2; i++)
-		result += '0';
-	for (int i = 0; i < one / 2; i++)
-		result += '1';
-	cout << result << "\n";
+	int z_c = zero / 2; int o_c = one / 2;
+	int cnt = 0;
+	for (int i = 0; i < s.size(); i++) {
+		if (s[i] == '1' && cnt <o_c) {
+			cnt++;
+			continue;
+		}
+		result += s[i];
+	}
+	int cnt1 = 0;
+	string result1 = "";
+	for (int i = 0; i <result.size(); i++) {
+		if (result[i] == '0' && cnt1 >= z_c)
+			continue;
+		if (result[i] == '0') {
+			cnt1++;
+		}
+		result1 += result[i];
+	}
+
+	cout << result1 << "\n";
 
 	return 0;
 }
