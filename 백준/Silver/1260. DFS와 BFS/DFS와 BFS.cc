@@ -1,53 +1,56 @@
 #include<iostream>
-#include<vector>
 #include<queue>
+#include<cstring>
+#include<vector>
 #include<stack>
 #include<algorithm>
 using namespace std;
-int n, m, s;
-bool visit_q[1001];
-bool visit_s[1001];
+
+int n, m, v;
+bool visit[1001];
 vector<int>graph[1001];
 
-void dfs(int start) {
-	visit_s[start] = true;
-	printf("%d ", start);
-
-	for (int i = 0; i < graph[start].size(); i++) {
-		int next = graph[start][i];
-		if (visit_s[next] == false) {
-			dfs(next);
+void bfs(int start) {
+	memset(visit, 0, sizeof(visit));
+	queue<int>q;
+	q.push(start);
+	visit[start] = 1;
+	while (!q.empty()) {
+		int cur = q.front();
+		cout << cur << " ";
+		q.pop();
+		for (int i = 0; i < graph[cur].size(); i++) {
+			int nx = graph[cur][i];
+			if (visit[nx] == 0) {
+				visit[nx] = 1;
+				q.push(nx);
+			}
 		}
 	}
 	return;
 }
 
-void bfs(int start) {
-
-	queue<int> q;
-	q.push(start);
-	visit_q[start] = 1;
-	while (!q.empty()) {
-		int cur = q.front();
-		cout << q.front() << " ";
-		q.pop();
-		for (int i = 0; i < graph[cur].size(); i++) {
-			int next = graph[cur][i];
-			if (!visit_q[next]) {
-				visit_q[next] = 1;
-				q.push(next);
-			}
+void dfs(int start) {
+	
+	cout << start << " ";
+	visit[start] = 1;
+	for (int i = 0; i < graph[start].size(); i++) {
+		int nx = graph[start][i];
+		if (!visit[nx]) {
+			dfs(nx);
 		}
-
 	}
+	return;
 }
 
 int main(void) {
 
-	scanf("%d %d %d", &n, &m, &s);
+    ios_base::sync_with_stdio(false);
+    cin.tie(0); cout.tie(0);
+	cin >> n >> m >> v;
 	for (int i = 0; i < m; i++) {
 		int a, b;
-		scanf("%d %d", &a, &b);
+		cin >> a >> b;
 		graph[a].push_back(b);
 		graph[b].push_back(a);
 	}
@@ -55,10 +58,8 @@ int main(void) {
 	for (int i = 1; i <= n; i++) {
 		sort(graph[i].begin(), graph[i].end());
 	}
-	
-	dfs(s);
-	printf("\n");
-	bfs(s);
-	
+	dfs(v);
+	cout << "\n";
+	bfs(v);
 	return 0;
 }
