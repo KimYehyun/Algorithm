@@ -1,30 +1,21 @@
 #include<iostream>
-#include<vector>
 #include<algorithm>
 using namespace std;
-
-vector<int>v;
-
+int n, m;
+int arr1[100001];
 int main(void) {
-
-	int N,M;
-	scanf("%d", &N);
-	for (int i = 0; i < N; i++) {
-		long long int a;
-		scanf("%lld", &a);
-		v.push_back(a);
+	ios_base::sync_with_stdio(false);
+	cin.tie(0); cout.tie(0);
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> arr1[i];
 	}
-
-	sort(v.begin(), v.end());
-
-	scanf("%d", &M);
-	for (int i = 0; i < M; i++) {
-		long long int m;
-		scanf("%lld", &m);
-		if (binary_search(v.begin(), v.end(), m))
-			printf("1\n");
-		else
-			printf("0\n");	
+	sort(arr1, arr1 + n);
+	cin >> m;
+	for (int i = 0; i < m; i++) {
+		int a;
+		cin >> a;
+		cout << binary_search(arr1,arr1+n,a) << "\n";
 	}
 
 	return 0;
