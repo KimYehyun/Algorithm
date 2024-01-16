@@ -1,36 +1,35 @@
 #include<iostream>
-#include<vector>
 #include<algorithm>
 using namespace std;
-long long n,m,min_v=2134567890;
-vector<long long>v;
+typedef long long ll;
 int main(void) {
-
-	cin >> n >> m;
-	for (int i = 0; i < n; i++) {
-		long long a;
-		cin >> a;
-		v.push_back(a);
-		min_v = max(min_v, a);
+	ios_base::sync_with_stdio(false);
+	cin.tie(0); cout.tie(0);
+	ll k, n;
+	ll max_v;
+	ll arr[10001];
+	cin >> k >> n;
+	for (int i = 0; i < k; i++) {
+		cin >> arr[i];
+		max_v = max(max_v, arr[i]);
 	}
-	
-	long long left = 1;
-	long long right = min_v;
-	long long max_v = 0;
+
+	ll left=1, right=max_v;
+	ll ans = 0;
 	while (left <= right) {
-		long long mid = (left + right) / 2;
-		long long  sum = 0;
-		for (int i = 0; i < n; i++) {
-			sum += v[i] / mid;
+		ll mid = (left+right)/2;
+		int cnt = 0;
+		for (int i = 0; i < k; i++) {
+			cnt += arr[i] / mid;
 		}
-		if (sum < m) {
-			right = mid -1;
+		if (cnt < n) {
+			right = mid - 1;
 		}
 		else {
-			max_v = max(max_v, mid);
+			ans = max(ans, mid);
 			left = mid + 1;
 		}
 	}
-	cout << max_v << "\n";
+	cout << ans << "\n";
 	return 0;
 }
