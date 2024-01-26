@@ -1,22 +1,24 @@
 #include<iostream>
-#include<vector>
 using namespace std;
+int arr[5000001];
 int main(void) {
 	ios_base::sync_with_stdio(false);
 	cin.tie(0); cout.tie(0);
-
 	int n;
 	cin >> n;
-	vector<int>v;
 	for (int i = 0; i < n; i++) {
-		int a;
-		cin >> a;
-		v.push_back(a);
+		cin >> arr[i];
 	}
+
 	int cnt = 1;
-	for (int i = 0; i < v.size()-1; i++) {
-		if (v[i] <= v[i + 1]) cnt++;
+	int cur = arr[0];
+	for (int i = 1; i < n; i++) {
+		if (cur <= arr[i]) {
+			cnt++;	
+		}
+		cur = arr[i];
 	}
 	cout << cnt << "\n";
+
 	return 0;
 }
