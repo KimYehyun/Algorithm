@@ -1,50 +1,59 @@
 #include<iostream>
-#include<algorithm>
 #include<queue>
+#include<cmath>
 using namespace std;
-int N, M;
+int n, m, car;
 int Rs[101];
-int Wk[10001];
-int p[101];
-int m, money;
-queue<int>q;
-int main(void) {
+int Wk[2001];
+int use[101];
+long long money;
+queue<int>wait;
 
-	cin >> N >> M;
-	for (int i = 0; i < N; i++) {
+int main(void) {
+	ios_base::sync_with_stdio(false);
+	cin.tie(0); cout.tie(0);
+	cin >> n >> m;
+	for (int i = 1; i <= n; i++) {
 		cin >> Rs[i];
 	}
-	for (int i = 1; i <= M; i++) {
+	for (int i = 1; i <= m; i++) {
 		cin >> Wk[i];
 	}
 
-	for (int i = 0; i < M * 2; i++) {
-		bool a = 0;
-		cin >> m;
-		if (m > 0) {
-			for (int j = 0; j < N; j++) {
-				if (p[j] == 0) {
-					p[j] = m;
-					a = 1;
-					money += Rs[j] * Wk[m];
+	for (int i = 0; i < m * 2; i++) {
+
+		cin >> car;
+	
+		if (car > 0) {
+			bool flag = 0;
+			for (int j = 1; j <= n; j++) {
+				if (use[j] == 0) {
+					use[j] = car;
+					money += Rs[j] * Wk[car];
+					flag = 1;
 					break;
 				}
 			}
-			if (a == 0) q.push(m);
+			if (flag == 0) {
+				wait.push(car);
+			}
 		}
 		else {
-			for (int j = 0; j < N; j++) {
-				if (p[j] == abs(m)) {
-					p[j] = 0;
-					if (!q.empty()) {
-						p[j] = q.front();
-						money += Rs[j] * Wk[q.front()];
-						q.pop();
-					}
+			bool flag = 0;
+			for (int j = 1; j <= n; j++) {
+				if (use[j] == abs(car)) {
+					use[j] = 0;
+					flag = 1;
 				}
+				if (flag==1 && !wait.empty()) {
+					use[j] = wait.front();
+					money += Rs[j] * Wk[wait.front()];
+					wait.pop();
+				}
+				if (flag == 1) break;
+				
 			}
-		
-		}	
+		}
 	}
 
 	cout << money;
