@@ -8,10 +8,9 @@ int w[102], v[102], n, m;
 
 int main(void)
 {
-	scanf("%d %d", &n, &m);
-
+	cin >> n >> m;
 	for (int i = 1; i <= n; i++)
-		scanf("%d %d", &w[i], &v[i]);
+		cin >> w[i] >> v[i];
 
 	for (int i = 1; i <= n; i++)
 	{
@@ -21,6 +20,7 @@ int main(void)
 			else
 				dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - w[i]] + v[i]);
 	}
-	printf("%d", dp[n][m]);
+	cout << dp[n][m];
+
 	return 0;
 }
