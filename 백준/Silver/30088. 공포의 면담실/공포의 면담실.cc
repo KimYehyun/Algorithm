@@ -2,8 +2,8 @@
 #include<vector>
 #include<algorithm>
 using namespace std;
-int n, count1, a, sum = 0;
-vector<int>v;
+long long n, count1, a, sum = 0;
+vector<long long>v;
 int main(void) {
 
 	ios_base::sync_with_stdio(false);
@@ -25,7 +25,7 @@ int main(void) {
 	for (int i = 1; i < n; i++) {
 		v[i] = v[i - 1] + v[i];
 	}
-	int result = 0;
+	long long result = 0;
 	for (auto k : v) {
 		result += k;
 	}
