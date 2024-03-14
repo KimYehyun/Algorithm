@@ -19,13 +19,11 @@ int main() {
     cin.tie(0); cout.tie(0);
     for(int i=0;i<4;i++){
         cin >> color[i];
-    }
-    sort(color,color+4);  
-    dfs(0);
-    vector<pair<string,string>>ans(m.begin(),m.end());
-    sort(ans.begin(),ans.end());
-    for(int i =0;i<ans.size();i++){
-        cout << ans[i].first<<" "<<ans[i].second<<"\n";
     } 
+    dfs(0);
+    for(auto a:m){
+        cout << a.first<<" "<<a.second<<"\n";
+    }
+     
     return 0;
 }
