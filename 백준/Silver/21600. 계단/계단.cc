@@ -1,29 +1,19 @@
-#include <iostream>
-#include <algorithm>
+#include <bits/stdc++.h>
 using namespace std;
-
+int a[100000], dp[100000];
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(0); cout.tie(0);
-    int n;
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    int n, m=1;
     cin >> n;
-    int k = 1;
-    int cnt = 0;
-    int max_v = 0;
-    for (int i = 0; i < n; i++) {
-        int a;
-        cin >> a;
-        if (a >= k) {     
-            k++;
-            cnt++;
+    dp[0]=1;
+    for(int i=0; i<n; i++) {
+        cin >> a[i];
+        if(i) {
+            if(a[i]>dp[i-1]) dp[i]=dp[i-1]+1;
+            else dp[i]=a[i];
         }
-        else {
-            max_v = max(max_v, cnt);
-            k = a;
-            cnt = a;    
-        }
+        m=max(m, dp[i]); 
     }
-    max_v = max(max_v, cnt);
-    cout << max_v;
-    return 0;
+    cout << m;
 }
