@@ -1,69 +1,49 @@
 #include<iostream>
-#include<queue>
 #include<vector>
-
-#define MAX 20001
-#define INF 987654321
+#include<algorithm>
+#include<queue>
 using namespace std;
+int n, m, start;
+int dist[20001];
+vector<pair<int,int>>graph[20001];
 
-int V, E, Start;
-int dist[MAX];
-vector<pair<int, int>> graph[MAX];
-
-void dijkstra()
-{
-    priority_queue<pair<int, int>> pq;
-    pq.push(make_pair(0, Start));
-    dist[Start] = 0;
-
-    while (!pq.empty())
-    {
-        int cost = -pq.top().first;
-        int cur = pq.top().second;
-        pq.pop();
-
-        if (dist[cur] < cost) continue;
-
-        for (int i = 0; i < graph[cur].size(); i++)
-        {
-            int next = graph[cur][i].first;
-            int nCost = graph[cur][i].second;
-
-            if (dist[next] > cost + nCost)
-            {
-                dist[next] = cost + nCost;
-                pq.push(make_pair(-dist[next], next));
-            }
-        }
-    }
-
-   
+void dijkstra() {
+	priority_queue<pair<int, int>>pq;
+	pq.push({ 0,start });
+	dist[start] = 0;
+	while (!pq.empty()) {
+		int cost = -pq.top().first;
+		int cur = pq.top().second;
+		pq.pop();
+		if (dist[cur] < cost) continue;
+		for (int i = 0; i < graph[cur].size(); i++) {
+			int ncur = graph[cur][i].first;
+			int ncost = graph[cur][i].second + cost;
+			if (dist[ncur] > ncost) {
+				pq.push({ -ncost,ncur });
+				dist[ncur] = ncost;
+			}
+		}
+	}
 }
 
 
-int main(void)
-{
-    scanf("%d %d", &V, &E);
-    scanf("%d", &Start);
-    for (int i = 0; i < E; i++)
-    {
-        int u, v, w; 
-        scanf("%d %d %d", &u, &v, &w);
-        graph[u].push_back(make_pair(v, w));
-    }
-
-    for (int i = 1; i <= V; i++) 
-        dist[i] = INF;
-
-    dijkstra();
-
-    for (int i = 1; i <= V; i++)
-    {
-        if (dist[i] == INF)
-            printf("INF\n");
-        else
-            printf("%d\n", dist[i]);
-    }
-
-    return 0;
+int main(void) {
+	ios_base::sync_with_stdio(false);
+	cin.tie(0); cout.tie(0);
+	cin >> n >> m >> start;
+	for (int i = 0; i < m; i++) {
+		int u, v, w;
+		cin >> u >> v >> w;
+		graph[u].push_back({v,w});
+	}
+	for (int i = 1; i <= n; i++) {
+		dist[i] = 2134567890;
+	}
+	dijkstra();
+	for (int i = 1; i <= n; i++) {
+		if (dist[i] == 2134567890) cout << "INF" << "\n";
+		else cout << dist[i] << "\n";
+	}
+	return 0;
 }
