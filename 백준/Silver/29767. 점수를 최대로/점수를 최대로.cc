@@ -1,31 +1,26 @@
-#include<iostream>
-#include<algorithm>
+#include<bits/stdc++.h>
 using namespace std;
+typedef long long ll;
+ll add[300001];
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(0); cout.tie(0);
 
-int n, m; long long sum = 0;
-long long arr[300001];
+    int n,k;
+    cin >> n >> k;
+    for(int i=1;i<=n;i++){
+        int a;
+        cin >> a;
+        add[i] = add[i-1] + a;
+    }
 
-int main(void) {
+    sort(add+1,add+n+1,greater<>());
 
-	ios_base::sync_with_stdio(false);
-	cin.tie(0); cout.tie(0);
+    ll ans = 0;
+    for(int i=1;i<=k;i++){
+        ans += add[i];
+    }
+    cout << ans;
 
-	cin >> n >> m;
-
-	cin >> arr[0];
-	for (int i = 1; i < n; i++) {
-		cin >> arr[i];
-		arr[i] = arr[i] + arr[i-1];
-	}
-
-
-	sort(arr, arr + n, greater<long long>());
-
-	
-	for (int i = 0; i < m; i++)
-		sum += arr[i];
-
-	cout << sum << "\n";
-
-	return 0;
+    return 0;
 }
