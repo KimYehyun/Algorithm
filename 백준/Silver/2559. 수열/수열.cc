@@ -1,31 +1,29 @@
-#include<iostream>
-#include<cmath>
+#include<bits/stdc++.h>
 using namespace std;
+typedef long long ll;
+ll add[100001];
+priority_queue<ll>temp;
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(0); cout.tie(0);
 
-int n, m;
-long long arr[100001];
+    int n,k;
+    cin >> n >> k;
+    for(int i=1;i<=n;i++){
+        int a;
+        cin >> a;
+        add[i] = add[i-1]+a;
+    }
 
-int main(void) {
-	ios_base::sync_with_stdio(false);
-	cin.tie(0); cout.tie(0);
-	cin >> n >> m;
+    int h = 0, t = k;
 
-	cin >> arr[1];
-	for (int i = 2; i <= n; i++) {
-		cin >> arr[i];
-		arr[i] = arr[i] + arr[i - 1];
-	}
+    while(t<=n){
+        temp.push(add[t]-add[h]);
+        t++;
+        h++;
+    }
 
-	int start = 0, end = m;
-	long long max1 = -987654321;
+    cout << temp.top();
 
-	while (end <= n) {
-		long long sum = 0;
-		sum = arr[end] - arr[start];
-		max1 = max(sum, max1);
-		end++;
-		start++;
-	}
-	cout << max1 << "\n";
-	return 0;
+    return 0;
 }
